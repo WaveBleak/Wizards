@@ -1,3 +1,5 @@
 name: Wizards
 version: '${version}'
 main: dk.wavebleak.wizards.Wizards
+commands:
+  giveability:

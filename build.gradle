@@ -1,6 +1,15 @@
-plugins {
-    id 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.2"
+    }
 }
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 group = 'dk.wavebleak'
 version = '1.0'
@@ -15,10 +24,16 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
+    maven {
+        name = "CodeMC"
+        url = uri("https://repo.codemc.io/repository/maven-public/")
+    }
 }
 
 dependencies {
-    compileOnly "org.spigotmc:spigot-api:1.12-R0.1-SNAPSHOT"
+    compileOnly "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"
+    implementation("de.tr7zw:item-nbt-api:2.12.2")
+    implementation 'org.reflections:reflections:0.10.2'
 }
 
 def targetJavaVersion = 8
