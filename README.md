@@ -17,5 +17,5 @@ Right now there's an ingame method and a function of obtaining the item
 
 Ingame you can type `/giveability <id of ability>` and then the ability will be added to your inventory
 
-You can also use the method, `Ability#getAsItem()`, you can get the ability from id by using `AbilityManager.fromID(Integer id)`
+You can also use the method `Ability#getAsItem()`, you can get the ability from id by using `AbilityManager.fromID(Integer id)`
 
