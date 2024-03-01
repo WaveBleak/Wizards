@@ -30,6 +30,7 @@ public interface IAbility {
     /**
      * A unique id representing the item
      * MUST NOT BE THE SAME AS ANY OTHER ID
+     * MUST NOT BE 0
      * @return the unique id
      */
     int id();
@@ -50,6 +51,7 @@ public interface IAbility {
 
     /**
      * Represents a method that is called when a player attacks a living entity.
+     * This event is called no matter if the player is holding their ability or not
      *
      * @param player The attacking player
      * @param victim The entity being attacked
@@ -58,6 +60,7 @@ public interface IAbility {
 
     /**
      * Called when a player breaks a block with the ability.
+     * This event is called no matter if the player is holding their ability or not
      *
      * @param event The BlockBreakEvent representing the block break action
      */

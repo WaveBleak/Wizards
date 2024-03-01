@@ -21,6 +21,11 @@ import org.reflections.Reflections;
 import java.util.*;
 import java.util.function.Function;
 
+/**
+ * The AbilityManager class is responsible for managing abilities in the game.
+ * It provides methods to retrieve abilities based on their ID and execute certain actions for each ability.
+ * It also listens to events and calls the corresponding methods in the abilities.
+ */
 public class AbilityManager implements Listener {
 
     public static List<Ability> abilities = new ArrayList<>();
@@ -30,14 +35,14 @@ public class AbilityManager implements Listener {
     }
 
     public static Ability fromItem(ItemStack item) {
-        int id = NBT.get(item, (Function<ReadableItemNBT, Integer>) nbt -> nbt.getInteger("id"));
+        if(item == null || item.getType() == Material.AIR || item.getAmount() == 0) return null;
+        Integer _int = NBT.get(item, (Function<ReadableItemNBT, Integer>) nbt -> nbt.getInteger("id"));
+        if(_int == null) return null;
+        int id = _int;
         return fromID(id);
     }
 
     public AbilityManager() {
-        for(Ability ability : abilities) {
-            ability.onStartup();
-        }
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -62,6 +67,11 @@ public class AbilityManager implements Listener {
             } catch (InstantiationException | IllegalAccessException e) {
                 Wizards.instance.getLogger().warning(e.getMessage());
             }
+        }
+
+        for(Ability ability : abilities) {
+            Wizards.instance.getLogger().info("TEST " + ability.name());
+            ability.onStartup();
         }
 
     }

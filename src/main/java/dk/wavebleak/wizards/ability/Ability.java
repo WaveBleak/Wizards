@@ -1,5 +1,10 @@
 package dk.wavebleak.wizards.ability;
 
+import com.sk89q.worldguard.bukkit.RegionContainer;
+import com.sk89q.worldguard.bukkit.RegionQuery;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.tr7zw.changeme.nbtapi.NBT;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -35,6 +40,20 @@ public abstract class Ability implements IAbility{
         });
 
         return item;
+    }
+
+    protected boolean isHoldingGem(Player player) {
+        return id() == AbilityManager.fromItem(player.getItemInHand()).id();
+    }
+
+    protected boolean isInSpawnArea(Player player) {
+        RegionContainer container =  WorldGuardPlugin.inst().getRegionContainer();;
+        ApplicableRegionSet set = container.get(player.getWorld()).getApplicableRegions(player.getLocation());
+        for(ProtectedRegion pr : set) if (pr.getId().toLowerCase().contains("spawn")) {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&l[!] Dette item kan ikke benyttes i spawn."));
+            return true;
+        }
+        return false;
     }
 
     protected void removeItem(Player player) {

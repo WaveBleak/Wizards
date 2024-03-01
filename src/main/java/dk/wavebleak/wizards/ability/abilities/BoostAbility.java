@@ -2,6 +2,7 @@ package dk.wavebleak.wizards.ability.abilities;
 
 import dk.wavebleak.wizards.Wizards;
 import dk.wavebleak.wizards.ability.Ability;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -25,23 +26,26 @@ public class BoostAbility extends Ability {
 
     @Override
     public int id() {
-        return 0;
+        return 1; //Must unique and NOT 0
     }
 
     @Override
     public void onRightClick(Player player) {
+        if(isInSpawnArea(player)) return;
         removeItem(player);
         player.setVelocity(player.getLocation().getDirection().multiply(2));
     }
 
     @Override
     public void onTick(Player player) {
+        //if(isHoldingGem(player)) {
+        //    Bukkit.broadcastMessage("A tick passed while " + player.getName() + " was holding their boost!");
+        //}
 
     }
 
     @Override
     public void onAttack(Player player, LivingEntity victim) {
-
     }
 
     @Override
@@ -51,6 +55,5 @@ public class BoostAbility extends Ability {
 
     @Override
     public void onStartup() {
-        Wizards.instance.getLogger().info("Boost ability registered!");
     }
 }

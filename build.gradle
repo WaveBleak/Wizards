@@ -28,12 +28,14 @@ repositories {
         name = "CodeMC"
         url = uri("https://repo.codemc.io/repository/maven-public/")
     }
+    maven { url "https://maven.enginehub.org/repo/" }
 }
 
 dependencies {
     compileOnly "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"
     implementation("de.tr7zw:item-nbt-api:2.12.2")
     implementation 'org.reflections:reflections:0.10.2'
+    compileOnly 'com.sk89q:worldguard:6.1.1-SNAPSHOT'
 }
 
 def targetJavaVersion = 8
